@@ -1,0 +1,48 @@
+#include <iostream>
+#include <string.h>
+#include <fstream>
+
+//a b c d e f g h i j k l m
+//m o p q r s t u v w x y z
+
+using namespace std;
+
+int main(){
+	
+	string file;
+	cout << "Enter the fil name :\t";cin >> file;
+	
+	char temp;
+	ifstream fin(file.c_str(), ios::binary);
+	file = "output";
+	ofstream fout(file.c_str(), ios::binary);
+
+	while(!fin.eof()){
+		fin >> noskipws >> temp;
+		char c = temp;
+		if(c >= 'a' && c <= 'z'){
+			if(c >= 'a' && c <= 'm'){
+				c = c + 13;
+				fout << c;
+			}
+			else if(c >= 'n' && c <= 'z'){
+				c = c - 13;
+				fout << c;
+			}
+		}
+		else if(c >= 'A' && c <= 'Z'){
+			if(c >= 'A' && c <= 'M'){
+				c = c + 13;
+				fout << c;
+			}
+			else if(c >= 'N' && c <= 'Z'){
+				c = c - 13;
+				fout << c;
+			}
+		}
+	}
+	cout << "Encryption completed go and check..." << endl;
+	fin.close();
+	fout.close();
+	system("pause");
+}	
