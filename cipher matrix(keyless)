@@ -1,0 +1,106 @@
+#include <iostream>
+#include <string.h>
+#include <fstream>
+
+using namespace std;
+
+string Encryption(string str){
+	int x=0,y=0;
+	int len;
+	
+	if(str.length()%2 != 0){
+		len = (str.length()+1)/2;
+		
+	}
+	else
+		len = (str.length()/2);
+		
+	char chr1[len],chr2[len];
+
+	for(int i=0; i<=str.length(); i++){
+		if((i+2)%2 == 0){
+			chr1[x] = str[i];
+			x++;
+		}
+		else{
+			chr2[y] = str[i];
+			y++;
+		}
+	}
+	x=0,y=0;
+	
+	for(int i=0; i <=str.length(); i++){
+		if(i < len){
+			str[i] = chr1[x];
+			x++;
+		}
+		else{
+			str[i] = chr2[y];
+			y++;
+		}
+	}
+	return str;
+}
+string Decryption(string str){
+	int x=0,y=0;
+	int len;
+	
+	if(str.length()%2 != 0){
+		len = (str.length()+1)/2;
+		
+	}
+	else
+		len = (str.length()/2);
+		
+	char chr1[len],chr2[len];
+
+	for(int i=0; i <=str.length(); i++){
+		if(i < len){
+			chr1[x] = str[i];
+			x++;
+		}
+		else{
+			chr2[y] = str[i];
+			y++;
+		}
+	}
+	x=0;
+	for(int i=0; i <=len; i++){
+		str[x] = chr1[i];
+		x++;
+		str[x] = chr2[i];
+		x++;
+	}
+	return str;
+}
+int main(){
+	string file;
+	int ans;
+	cout << "Enter the file name :\t";cin >> file;
+	cout << "\n1) Encryption        2) Decryption" << endl;
+	cout << "Which one(1,2) ? ";cin >> ans;
+	
+	ifstream fin(file.c_str(), ios::binary);
+	file = "output";
+	ofstream fout(file.c_str(), ios::binary);
+	string text;
+	
+	if(ans == 1){
+		while(getline(fin, text)){
+			fout << Encryption(text) << endl;
+		}
+		fin.close();
+		fout.close();
+		cout << "The file Encrypted successfully" << endl;
+	}
+	else if(ans == 2){
+		while(getline(fin, text)){
+			fout << Decryption(text) << endl;
+		}
+		fin.close();
+		fout.close();
+		cout << "The file Encrypted successfully" << endl;
+	}
+	
+	system("pause");
+}
