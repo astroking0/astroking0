@@ -1,0 +1,36 @@
+#include <iostream>
+#include <string.h>
+#include <fstream>
+#include <ctype.h>
+
+using namespace std;
+
+string atbash(string str){
+	string alpha1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	string alpha2 = "ZYXWVUTSRQPONMLKJIHGFEDCBA";
+	string cipher = " ";
+	
+	for(int i=0; i < str.length(); i++)
+		str[i] = toupper(str[i]);
+	
+	for(int i=0; i < str.length(); i++){
+			if(isspace(str[i]))
+				cipher += " ";		
+			else{
+				for(int j=0; j < 26; j++){
+					if(str[i] == alpha1[j])
+						cipher += alpha2[j]; 
+			}	
+		}
+	}
+	return cipher;
+}
+
+int main(){
+	string text;
+	
+	cout << "Enter the text :";getline(cin,text);
+	cout << "Encrypted text : " << atbash(text) << endl;
+	
+	system("pause");
+}
