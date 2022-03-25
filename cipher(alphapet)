@@ -1,0 +1,59 @@
+#include <iostream>
+#include <string.h>
+
+using namespace std;
+
+void keyword(string&key){
+	string alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	string keyword = " ";
+	int x = 0;
+	cout << "Enter the key :\t";cin >> key;
+	for(int i=0; i < key.length(); i++)
+		key[i] = toupper(key[i]);
+	for(int i=0; i < 26; i++){
+		for(int j = 0; j < key.length(); j++){
+			x = 0;
+			if(alpha[i] == key[j]){
+				x++;
+				break;
+			}
+		}
+		if(x != 1){
+			keyword.push_back(alpha[i]);
+		}
+	}
+	for(int i = 0; i < key.length(); i++){
+		keyword.push_back(key[i]);
+	}
+	key = keyword;
+}
+string atbash(string str, string key){
+	string alpha1 = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	string alpha2 = key;
+	string cipher = " ";
+	
+	for(int i=0; i < str.length(); i++)
+		str[i] = toupper(str[i]);
+	
+	for(int i=0; i < str.length(); i++){
+			if(isspace(str[i]))
+				cipher += " ";		
+			else{
+				for(int j=0; j < 26; j++){
+					if(str[i] == alpha1[j])
+						cipher += alpha2[j]; 
+			}	
+		}
+	}
+	return cipher;
+}
+
+int main(){
+	string str,key;
+	cout << "Enter the string text :";getline(cin,str);
+	keyword(key);
+	
+	cout << "The encrypted text : " << atbash(str,key) << endl;
+	
+	system("pause");
+}
